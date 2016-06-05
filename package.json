@@ -5,8 +5,9 @@
   "main": "lib/webclip.js",
   "scripts": {
     "test": "eslint ./src/*.js",
+    "dev": "webpack --config ./build/webpack.config.umd.js -w",
     "build:cmd": "webpack --config ./build/webpack.config.cmd.js",
-    "build:dist": "webpack --config ./build/webpack.config.umd.js -p"    
+    "build:dist": "webpack --config ./build/webpack.config.umd.js -p"
   },
   "repository": {
     "type": "git",

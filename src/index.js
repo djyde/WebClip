@@ -69,7 +69,11 @@ class WebClip {
   }
 
   use (plugin) {
-    this.plugins.push(plugin)
+    if (Array.isArray(plugin)) {
+      this.plugins = plugin
+    } else {
+      this.plugins.push(plugin)
+    }
   }
 
   showToolbar (rect) {
@@ -77,19 +81,22 @@ class WebClip {
     if (!this.toolbar) {
       this.toolbar = createToolbar.call(this)
     }
+    this.toolbar.style.display = ''
     this.toolbar.style.opacity = '1'
     // caculate the position of toolbar
     const toolbarWidth = this.toolbar.offsetWidth
     const toolbarHeight = this.toolbar.offsetHeight
+    console.log(rect)
     this.toolbar.style.left = `${(rect.right - rect.left) / 2 + rect.left - toolbarWidth / 2}px`
-    this.toolbar.style.top = `${rect.top - toolbarHeight - 4}px`
+    this.toolbar.style.top = `${rect.top - toolbarHeight - 4 + document.body.scrollTop}px`
   }
 
   hideToolbar () {
     if (this.toolbar) {
       this.toolbar.style.opacity = '0'
+      delay(() => { this.toolbar.style.display = 'none' })
     }
   }
 }
 
-export default WebClip
+module.exports = WebClip

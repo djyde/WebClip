@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WebClip</title>
+  <link rel="stylesheet" href="/dist/webclip.css">
+  <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">-->
+  <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-min.css">-->
+  <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">-->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  <script src="/dist/webclip.js"></script>
+
+  <style>
+    header {
+      padding-top: 3em;
+      text-align: center;
+    }
+    
+    .site-width {
+      width: 960px;
+      margin: 0 auto;
+    }
+    
+    code {
+      border-radius: 0;
+    }
+    
+    section {
+      margin-top: 2em !important;
+    }
+    
+    .demo {
+      padding: 1em;
+      padding-top: 0;
+    }
+    
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>WebClip</h1>
+    <h6>Plugable popup in browser. Inspired by <a href="https://pilotmoon.com/popclip" target="_blank">PopClip</a>.</h6>
+    <code class="bash">$ npm install webclip</code>
+  </header>
+  <section class="site-width">
+
+    </sectoin>
+    <section class="site-width">
+      <!--<pre><code class="html">
+        <html>
+          <body>
+            <div id="container">Some content</div>
+          </body>
+        </html>
+      </code></pre>-->
+      <div class="pure-g">
+        <div class="pure-u-18-24">
+          <h3>Basic Usage</h3>
+          <pre><code class="javascript">
+  import WebClip from 'webclip'
+  let webclip = new WebClip(document.querySelector('#your-container'))
+
+  const google = {
+    name: 'Google',
+    description: 'Search on Google',
+    action(value) {
+      // `value` is the selected content
+      window.open(`https://www.google.com.hk/#safe=strict&q=${value}`)
+    }
+  }
+  
+  const bing = {
+    name: 'Bing',
+    description: 'Search on Bing',
+    action(value) {
+      window.open(`http://bing.com/search?q=${value}`)
+    }
+  }
+
+  webclip.use([google, bing])
+        </code></pre>
+
+        </div>
+        <div class="pure-u-6-24">
+          <div class="demo">
+            <h3>Demo</h3>
+            <div id="usage-demo">
+              <p>I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see
+                if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-width pure-g">
+      <div class="pure-u-18-24">
+        <h3>Use the Range</h3>
+        <p>WebClip will pass the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Range" target="_blank">Range</a>          in <code>action()</code>. You can use it to do a lot, such as wrapping a highlight wrapper.</p>
+        <pre><code>
+  const highlight = {
+    name: 'highlight',
+    description: 'Highlight content',
+    action(value, range) {
+      const $highlight = document.createElement('span')
+      $highlight.style.backgroundColor = 'rgba(92,255,160,.5)'
+      // or just add a class
+      // $highlight.classList.add('your-class')
+      range.surroundContents($highlight)      
+    }
+  }
+  
+  webclip.use([highlight, google, bing])
+        </code></pre>
+      </div>
+
+      <div class="pure-u-6-24">
+        <div class="demo">
+          <h3>Demo</h3>
+          <div id="range-demo">
+            <p>I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see
+              if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived.</p>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+    </section>
+
+
+    <script>
+      var google = {
+      name: 'Google',
+      description: 'Search on Google',
+      action: function(value) {
+        window.open('https://www.google.com.hk/#safe=strict&q=' + value)
+      }
+    }
+    var bing = {
+      name: 'Bing',
+      description: 'Search on Bing',
+      action: function(value) {
+        window.open('http://bing.com/search?q='+ value)
+      }
+    }
+    var highlight = {
+      name: 'highlight',
+      description: 'Highlight content',
+      action: function(value, range) {
+        var $highlight = document.createElement('span')
+        $highlight.style.backgroundColor = 'rgba(92,255,160,.5)'
+        range.surroundContents($highlight)
+      }
+    }
+    var usageClip = new WebClip(document.querySelector('#usage-demo'))
+    var rangeClip = new WebClip(document.querySelector('#range-demo'))
+    
+    usageClip.use([google, bing])
+    rangeClip.use([highlight, google, bing])
+    </script>
+</body>
+
+</html>
