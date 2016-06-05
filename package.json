@@ -1,6 +1,6 @@
 {
   "name": "webclip",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Plugable popup in browser",
   "main": "dist/webclip.common.js",
   "scripts": {
