@@ -15,16 +15,15 @@ function createToolbar (parent, plugins) {
     item.setAttribute('title', plugin.description || plugin.name)
 
     if (plugin.icon) {
-      let image = document.createElement('img')
-      image.src = plugin.icon
-      item.classList.add('icon')
-      item.appendChild(image)
+      let fa = document.createElement('i')
+      item.classList.add('webclip-icon', 'fa', `fa-${plugin.icon}`)
+      item.appendChild(fa)
     } else {
       item.textContent = plugin.name.charAt(0).toUpperCase()
     }
 
     // add onclick event listener with `action` action
-    item.addEventListener('click', () => {
+    item.addEventListener('click', e => {
       plugin.action(ctx.selectedContent, ctx.selection.getRangeAt(0).cloneRange())
     })
 

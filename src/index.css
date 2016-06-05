@@ -13,17 +13,19 @@
   padding: 0;
   border-radius: 4px;
   list-style-type: none;
-  
+
   &::after{
     content: '';
     position: absolute;
     left: 50%;
     margin-left: -6px;
-    top: 22px;
-    width: 12px;
-    height: 12px;
-    background-color: black;
-    transform: rotate(45deg) scale(.5);
+    width: 0;
+    height: 0;
+    border-width: 6px;
+    border-color: black transparent transparent transparent;
+    border-style: solid;
+    top: 50%;
+    margin-top: 12px;
   }
   
   .webclip-item{
@@ -38,16 +40,6 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
-    
-    &.icon {
-      width: 12px;
-      height: 12px;
-    }
-    
-    img{
-      width: 12px;
-      height: 12px;
-    }
   }
   
   &.hide {

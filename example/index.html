@@ -8,6 +8,7 @@
   <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/grids-min.css">-->
   <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">-->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/github.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
   <script>
@@ -136,6 +137,51 @@
 
       </div>
     </section>
+    
+    <section class="site-width pure-g">
+      <div class="pure-u-18-24">
+        <h3>Plugin icon</h3>
+        <p>You can config a <a href="http://fontawesome.io" target="_blank">font-awesome</a> icon for a plugin, instead of the uppercase-first-character</p>
+        <pre><code>
+  const highlight = {
+    name: 'highlight',
+    description: 'Highlight content',
+    icon: 'pencil',
+    action(value, range) {
+      const $highlight = document.createElement('span')
+      $highlight.style.backgroundColor = 'rgba(92,255,160,.5)'
+      // or just add a class
+      // $highlight.classList.add('your-class')
+      range.surroundContents($highlight)      
+    }
+  }
+  
+  const remove = {
+    name: 'remove',
+    description: 'Remove content',
+    icon: 'trash',
+    action(value, range) {
+      range.deleteContents()
+    }
+  }
+  
+  webclip.use([highlight, remove, google, bing])
+        </code></pre>
+      </div>
+
+      <div class="pure-u-6-24">
+        <div class="demo">
+          <h3>Demo</h3>
+          <div id="icon-demo">
+            <p>I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see
+              if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived.</p>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+    </section>
 
 
     <script>
@@ -162,11 +208,34 @@
         range.surroundContents($highlight)
       }
     }
+    var highlightWithIcon = {
+      name: 'highlight',
+      description: 'Highlight content',
+      icon: 'pencil',
+      action: function(value, range) {
+        var $highlight = document.createElement('span')
+        $highlight.style.backgroundColor = 'rgba(92,255,160,.5)'
+        range.surroundContents($highlight)
+      }
+    }
+    var remove = {
+      name: 'remove',
+      description: 'Remove content',
+      icon: 'trash',
+      action: function(value, range) {
+        range.deleteContents()
+      }
+    }
+    
     var usageClip = new WebClip(document.querySelector('#usage-demo'))
     var rangeClip = new WebClip(document.querySelector('#range-demo'))
+    var iconClip = new WebClip(document.querySelector('#icon-demo'))
+    
     
     usageClip.use([google, bing])
     rangeClip.use([highlight, google, bing])
+    iconClip.use([highlightWithIcon, remove, google, bing])
+    
     </script>
 </body>
 
