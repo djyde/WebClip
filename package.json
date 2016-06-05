@@ -2,7 +2,7 @@
   "name": "webclip",
   "version": "0.1.0",
   "description": "PopClip in browser",
-  "main": "lib/webclip.js",
+  "main": "dist/webclip.common.js",
   "scripts": {
     "test": "eslint ./src/*.js",
     "dev": "webpack --config ./build/webpack.config.umd.js -w",
