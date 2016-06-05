@@ -75,7 +75,7 @@ class WebClip {
     }
   }
 
-  showToolbar (rect) {
+  showToolbar (rect, range) {
     // toolbar element only create once
     if (!this.toolbar) {
       this.toolbar = createToolbar.call(this)
@@ -85,7 +85,9 @@ class WebClip {
     // caculate the position of toolbar
     const toolbarWidth = this.toolbar.offsetWidth
     const toolbarHeight = this.toolbar.offsetHeight
-    console.log(rect)
+    const parent = this.selection.anchorNode.parentNode
+    const parentLineheight = parseInt(window.getComputedStyle(parent).getPropertyValue('line-height').replace('px', '')) || 0
+    console.log(parentLineheight)
     this.toolbar.style.left = `${(rect.right - rect.left) / 2 + rect.left - toolbarWidth / 2}px`
     this.toolbar.style.top = `${rect.top - toolbarHeight - 4 + document.body.scrollTop}px`
   }
